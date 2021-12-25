@@ -13,25 +13,17 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        min = math.inf
-        minPos = 0
-        max = 0
-        maxPos = 0
-        for i in range(len(prices)):
-            if prices[i] < min:
-                min = prices[i]
-                minPos = i
+        """
+        time complexity: O(n)
+        space complexity: O(1)
+        """
+        profit = 0
+        biggestNum = prices[len(prices) - 1]
+        for i in reversed(range(len(prices))):
+            profit = max(profit, biggestNum - prices[i])
+            biggestNum = max(biggestNum, prices[i])
 
-        for i in reversed(range(minPos, len(prices))):
-            if prices[i] > max:
-                max = prices[i]
-                maxPos = i
-
-        print("min", min)
-        print("max", max)
-        return prices[maxPos] - prices[minPos]
-
-
+        return profit
         
 
 result = Solution()
@@ -48,4 +40,8 @@ print("Actual Answer", result.maxProfit([9, 11, 8, 5, 7, 10]))
 
 print("Expected answer, 2")
 print("Actual Answer", result.maxProfit([2, 4, 1]))
+
+print("Expected Answer, 4")
+print("Actual Answer", result.maxProfit([3,2,6,5,0,3]))
+
 
