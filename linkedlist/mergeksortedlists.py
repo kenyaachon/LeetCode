@@ -34,7 +34,14 @@ class Solution:
         return root
 
 
-a = ListNode(1, ListNode(3, ListNode(5)))
-b = ListNode(2, ListNode(4, ListNode(6)))
+a = ListNode(1, ListNode(4, ListNode(5)))
+b = ListNode(1, ListNode(3, ListNode(4)))
+c = ListNode(2, ListNode(6))
 answer = Solution()
-print(answer.mergeKLists([a, b]))
+print(answer.mergeKLists([a, b, c]))
+
+answer = Solution()
+print(answer.mergeKLists([]))
+
+answer = Solution()
+print(answer.mergeKLists([[ListNode("")]]))
