@@ -29,7 +29,10 @@ def bstValidator(root, min, max):
 
     return bstValidator(root.left, min, root.key - 1) and bstValidator(root.right, root.key + 1, max)
 
-def subtree(root):
+
+## attempt at traversing the subtree with a queue
+## but it doesn't always work
+def subtree54(root):
   result = ''
   que = deque()
   que.append(root)
@@ -48,6 +51,29 @@ def subtree(root):
 
   return result
 
+
+
+def subtree(root):
+  result = ''
+  stack = []
+  current = root
+  while True:
+    if current:
+      stack.append(current)
+      current = current.left
+    elif (stack):
+      current = stack.pop()
+      if len(result):
+        if int(result[-1]) > current.key:
+          return result
+      result += str(current.key)
+      current = current.right
+    else:
+      break
+  
+  return result
+
+  
 def size(root) -> int:
     if root is None:
         return 0
