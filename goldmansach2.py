@@ -68,6 +68,7 @@ time
 
 """
 
+
 def maxInversions(arr):
     # Write your code here
     if len(arr) < 3:
@@ -79,41 +80,41 @@ def maxInversions(arr):
     possibleInversions = set()
 
     # for each possible element
-    # for i in range(len(arr)):
-    #     sub = [sortedArr[i]]
-    #     #iterate through the array after index i
-    #     for j in range(i, len(arr)):
-    #         if len(sub) < 3 and sortedArr[j] < sub[-1]:
-    #             sub.append(sortedArr[j])
-    #             print("hit1", i)
-    #             print(sub)
-    #         else:
-    #             # print("hit", i)
-    #             print(sub)
-    #             if (str(sub) not in possibleInversions) and len(sub) == 3:
-    #                 # possibsleInversions[str(sub)] = sub
-    #                 possibleInversions.add(str(sub))
-    #                 # print("hit2")
-                
-    #             if sortedArr[j] < sortedArr[i]:
-    #                 sub = [sortedArr[i], sortedArr[j]]
-    #             else:
-    #                 sub = [sortedArr[i]]
-
-    #     if len(sub) == 3 and str(sub) not in possibleInversions:
-    #         # possibleInversions[str(sub)] = sub
-    #         possibleInversions.add(str(sub))
-
     for i in range(len(arr)):
         sub = [sortedArr[i]]
+        #iterate through the array after index i
         for j in range(i, len(arr)):
-            if sortedArr[j] < sub[-1]:
+            if len(sub) < 3 and sortedArr[j] < sub[-1]:
                 sub.append(sortedArr[j])
-                for k in range(j, len(arr)):
-                    if sortedArr[k] < sub[-1]:
-                        sub.append(sortedArr[k])
-                        possibleInversions.add(str(sub))
-                        sub = sub[:3]
+                print("hit1", i)
+                print(sub)
+            else:
+                # print("hit", i)
+                print(sub)
+                if (str(sub) not in possibleInversions) and len(sub) == 3:
+                    # possibsleInversions[str(sub)] = sub
+                    possibleInversions.add(str(sub))
+                    # print("hit2")
+                
+                if sortedArr[j] < sortedArr[i]:
+                    sub = [sortedArr[i], sortedArr[j]]
+                else:
+                    sub = [sortedArr[i]]
+
+        if len(sub) == 3 and str(sub) not in possibleInversions:
+            # possibleInversions[str(sub)] = sub
+            possibleInversions.add(str(sub))
+
+    # for i in range(len(arr)):
+    #     sub = [sortedArr[i]]
+    #     for j in range(i, len(arr)):
+    #         if sortedArr[j] < sub[-1]:
+    #             sub.append(sortedArr[j])
+    #             for k in range(j, len(arr)):
+    #                 if sortedArr[k] < sub[-1]:
+    #                     sub.append(sortedArr[k])
+    #                     possibleInversions.add(str(sub))
+    #                     sub = sub[:3]
 
     return len(possibleInversions)
     
@@ -123,3 +124,6 @@ print("actual,", maxInversions([4,2, 2, 1]))
 
 print("expected [5, 4, 3, 2, 1], ", 7)
 print("actual,", maxInversions([5, 4, 3, 2, 1]))
+
+print("expected [8, 4, 2, 1], ", 4)
+print("actual,", maxInversions([8, 4, 2, 1]))
