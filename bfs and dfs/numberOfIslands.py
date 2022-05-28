@@ -1,5 +1,6 @@
 from typing import List
 from collections import deque
+import time
 
 """
 islands is surrounded by water and is formed by connecting
@@ -17,44 +18,55 @@ output: the number of islands
 """
 class Solution:
 
-    def valid(self, grid, visited, i, j):
+    def valid(self, grid, i, j):
         if not (0 <= i < len(grid)):
             return False
         if not (0 <= j < len(grid[i])):
-            return False
-        if visited[i][j]:
             return False
         return True
 
     
     def numIslands(self, grid: List[List[str]]) -> int:
-        if len(grid) == 1:
-            if len(grid[0]) == 1:
-                if grid[0][0] == '1':
-                    return 1
-                else:
-                    return 0
+        row = len(grid)
+        column = len(grid[0])
+        if row == 1 and column == 1:
+            if grid[0][0] == '1':
+                return 1
+            else:
+                return 0
         islands = 0
 
-        column = len(grid[0])
-        visited = [[False] * column for i in range(len(grid))]
+        visited = [[False] * column for i in range(row)]
         neighbors = [[0, -1], [-1, 0],[0, 1], [1, 0]]
+        queue = deque()
+
+        def valid(i, j):
+            if not (0 <= i < row):
+                return False
+            if not (0 <= j < column):
+                return False
+            return True
+
+
         def bfs(i, j):
-            print("hello")
-            queue = deque()
             queue.append([i, j])
             while len(queue):
                 node = queue.popleft()
 
                 visited[node[0]][node[1]] = True
                 for adj in neighbors:
+
                     adjx = node[0] + adj[0]
                     adjy = node[1] + adj[1]
-                    if self.valid(grid, visited, adjx, adjy) and grid[adjx][ adjy] != '0':
-                        queue.append([adjx, adjy])
+                    if valid(adjx, adjy):
+                    # if self.valid(grid, adjx, adjy):
+                        if  not visited[adjx][adjy] and (grid[adjx][adjy] == '1'):
+                            visited[adjx][adjy] = True
+
+                            queue.append([adjx, adjy])
 
 
-        for i in range(len(grid)):
+        for i in range(row):
             for j in range(column):
                 if not visited[i][j] and grid[i][j] != '0':
                     bfs(i, j)
@@ -91,5 +103,32 @@ print("expected, 1")
 print("actual", solution.numIslands([['1']]))
 
 solution = Solution()
-print("expected, 1")
+print("expected, 0")
 print("actual", solution.numIslands([['0']]))
+
+map = [["1","1","1","1","1","0","1","1","1","1","1","1","1","1","1","0","1","0","1","1"],
+["0","1","1","1","1","1","1","1","1","1","1","1","1","0","1","1","1","1","1","0"],
+["1","0","1","1","1","0","0","1","1","0","1","1","1","1","1","1","1","1","1","1"],
+["1","1","1","1","0","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+["1","0","0","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+["1","0","1","1","1","1","1","1","0","1","1","1","0","1","1","1","0","1","1","1"],
+["0","1","1","1","1","1","1","1","1","1","1","1","0","1","1","0","1","1","1","1"],
+["1","1","1","1","1","1","1","1","1","1","1","1","0","1","1","1","1","0","1","1"],
+["1","1","1","1","1","1","1","1","1","1","0","1","1","1","1","1","1","1","1","1"],
+["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+["0","1","1","1","1","1","1","1","0","1","1","1","1","1","1","1","1","1","1","1"],
+["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+["1","1","1","1","1","0","1","1","1","1","1","1","1","0","1","1","1","1","1","1"],
+["1","0","1","1","1","1","1","0","1","1","1","0","1","1","1","1","0","1","1","1"],
+["1","1","1","1","1","1","1","1","1","1","1","1","0","1","1","1","1","1","1","0"],
+["1","1","1","1","1","1","1","1","1","1","1","1","1","0","1","1","1","1","0","0"],
+["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]]
+solution = Solution()
+print("expect, something")
+start = time.time()
+print("actual", solution.numIslands(map))
+end = time.time()
+print("time to execute", end-start)
