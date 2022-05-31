@@ -16,6 +16,7 @@ class Solution:
                 anagrams[stVal] = [subStr]
         return list(anagrams.values())
 
+
 solution = Solution()
 print('expect answer [["bat"],["nat","tan"],["ate","eat","tea"]] ')
 print(f'actual answer {solution.groupAnagrams(["eat","tea","tan","ate","nat","bat"])}')
