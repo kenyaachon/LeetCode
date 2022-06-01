@@ -1,37 +1,5 @@
-# class MedianFinder:
-
-#     def __init__(self):
-#         #data store
-#         self._nums = []
-        
-
-#     def addNum(self, num: int) -> None:
-#         self._nums.insert(0, num)
-#         self._nums.sort()
-        
-
-#     def findMedian(self) -> float:
-#         print(self._nums)
-#         n = len(self._nums)
-#         if n == 0:
-#             return None
-        
-#         if n% 2 == 0:
-#             middle = int(n/2)
-#             first = middle -1
-#             # return round(float((self._nums[first]+self._nums[middle])/2), 5)
-#             return float((self._nums[first]+self._nums[middle])/2)
-
-#         else:
-#             # return round(float(self._nums[int(n/2)]), 5)
-#             return float(self._nums[int(n/2)])
-
-
-from heapq import heappush
-import heapq
+from bisect import bisect, insort_left
 import time
-
-
 class MedianFinder:
 
     def __init__(self):
@@ -42,24 +10,59 @@ class MedianFinder:
     def addNum(self, num: int) -> None:
         # self._nums.insert(0, num)
         # self._nums.sort()
-        heappush(self._nums, num)
+        insort_left(self._nums, num)
         
 
     def findMedian(self) -> float:
+        print(self._nums)
         n = len(self._nums)
         if n == 0:
             return None
         
+        if n% 2 == 0:
+            middle = int(n/2)
+            first = middle -1
+            # return round(float((self._nums[first]+self._nums[middle])/2), 5)
+            return float((self._nums[first]+self._nums[middle])/2)
 
-
-        if n %2 == 0:
-            middle = int(n/2) + 1
-            temp = heapq.nlargest(middle, self._nums.copy())
-            return (temp[-1] + temp[-2])/2
         else:
-            middle = int(n/2) + 1
-            temp = heapq.nlargest(middle, self._nums.copy())
-            return temp[-1]
+            # return round(float(self._nums[int(n/2)]), 5)
+            return float(self._nums[int(n/2)])
+
+
+# from heapq import heappush
+# import heapq
+# import time
+
+
+# class MedianFinder:
+
+#     def __init__(self):
+#         #data store
+#         self._nums = []
+        
+
+#     def addNum(self, num: int) -> None:
+#         # self._nums.insert(0, num)
+#         # self._nums.sort()
+#         heappush(self._nums, num)
+        
+
+#     def findMedian(self) -> float:
+#         n = len(self._nums)
+#         if n == 0:
+#             return None
+        
+
+
+#         if n %2 == 0:
+#             middle = int(n/2) + 1
+#             temp = heapq.nlargest(middle, self._nums.copy())
+#             return (temp[-1] + temp[-2])/2
+#         else:
+#             middle = int(n/2) + 1
+#             temp = heapq.nlargest(middle, self._nums.copy())
+#             return temp[-1]
 
             
         # print(self._nums)
