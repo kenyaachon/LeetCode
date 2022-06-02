@@ -11,10 +11,11 @@ class MedianFinder:
         # self._nums.insert(0, num)
         # self._nums.sort()
         insort_left(self._nums, num)
+
         
 
     def findMedian(self) -> float:
-        print(self._nums)
+        # print(self._nums)
         n = len(self._nums)
         if n == 0:
             return None
@@ -30,8 +31,11 @@ class MedianFinder:
             return float(self._nums[int(n/2)])
 
 
+
+# from collections import deque
 # from heapq import heappush
 # import heapq
+# import queue
 # import time
 
 
@@ -52,33 +56,48 @@ class MedianFinder:
 #         n = len(self._nums)
 #         if n == 0:
 #             return None
-        
+#         if n == 1:
+#             return self._nums[0]
+
+#         middlePt = int(n/2)
+#         firstPt = middlePt -1
+#         middle = 0
+#         first = 0
+
+#         queue = deque()
+#         queue.append(0)
+#         num = 0 
+
+#         for i in range(n):
+#             node = queue.popleft()
+#             if n%2 == 0:
+#                 if num == firstPt:
+#                     # first = self._nums[node]
+#                     first = node
+#             if num == middlePt:
+#                 # middle = self._nums[node]
+#                 middle = node
+#                 break
+
+#             if (2*node+1 < n):
+#                 queue.append(2*node+1)
+            
+#             if (2*node+2 < n):
+#                 queue.append(2*node+2)
+#             num += 1
+
+            
+
+#             # print(f"middle {middle}")
+#             # print(f"first {first}")
 
 
-#         if n %2 == 0:
-#             middle = int(n/2) + 1
-#             temp = heapq.nlargest(middle, self._nums.copy())
-#             return (temp[-1] + temp[-2])/2
+#         if n% 2 == 0:
+
+#             return float((self._nums[first]+self._nums[middle])/2)
 #         else:
-#             middle = int(n/2) + 1
-#             temp = heapq.nlargest(middle, self._nums.copy())
-#             return temp[-1]
-
-            
-        # print(self._nums)
-        # if n% 2 == 0:
-        #     middle = int(n/2)
-        #     first = middle -1
-            
-        #     return (self._nums[first]+self._nums[middle])/2
-        #     # return float((temp[first]+temp[middle])/2)
-
-        # else:
-        #     # return float(self._nums[int(n/2)])
-        #     temp = sorted(self._nums)
-        #     return float(temp[int(n/2)])
-
-
+#             return float(self._nums[middle])
+        
 # Your MedianFinder object will be instantiated and called as such:
 obj = MedianFinder()
 start = time.time()
