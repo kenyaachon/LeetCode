@@ -77,13 +77,11 @@ def products(sum):
 
     # for i in range(n-2, -1, -1):
     #     suffix[i] = suffix[i+1] * sum[i]
-    for i in range(n):
-        if i == 0:
-            prefix[0] = sum[0]
-            suffix[n-1] = sum[n-1]
-        else:
-            prefix[i] = prefix[i-1] * sum[i]
-            suffix[n-i-1] = suffix[n-i] * sum[n-i-1]
+    prefix[0] = sum[0]
+    suffix[n-1] = sum[-1]
+    for i in range(1, n):
+        prefix[i] = prefix[i-1] * sum[i]
+        suffix[n-i-1] = suffix[n-i] * sum[n-i-1]
 
     for i in range(n):
         if i - 1 >= 0 and i + 1 < n:
