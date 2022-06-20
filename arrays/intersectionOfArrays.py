@@ -62,8 +62,6 @@ class Solution:
         
         #make set of the bigger list
         store = set(nums1)
-        
-        
         result = set()
         for i in range(len(nums2)):
             if nums2[i] in store:
